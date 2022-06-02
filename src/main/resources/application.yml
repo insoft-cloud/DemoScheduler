@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://172.30.160.29:5432/postgres?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8"
+    username: postgres
+    password: rlwjddnjs1!
+  batch:
+    job:
+      names: "batchJob"
+    jdbc:
+      initialize-schema: embedded
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      # always : 서버를 재시작 할 때 마다 DB 초기화, 스키마가 없을 경우 새로 생성
+      # embedded : 서버를 재시작 해도 기존 DB 데이터 유지, 스키마가 없을 경우 에러 발생
+      initialize-schema: embedded
+    properties:
+      org:
+        quartz:
+          jobStore:
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+
+server:
+  port: 8080
